@@ -1,13 +1,13 @@
 # Create Security Group - SSH Traffic
 resource "aws_security_group" "vpc-ssh" {
   name        = "vpc-ssh"
-  description = "Dev VPC SSH"
+  description = "Semiramis VPC SSH"
   ingress {
     description = "Allow Port 22"
     from_port   = 22
     to_port     = 22
     protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
+    cidr_blocks = ["185.92.122.211/32"]
   }
 
   egress {
@@ -26,7 +26,7 @@ resource "aws_security_group" "vpc-ssh" {
 # Create Security Group - Web Traffic
 resource "aws_security_group" "vpc-web" {
   name        = "vpc-web"
-  description = "Dev VPC Web"
+  description = "Semiramis VPC Web"
   ingress {
     description = "Allow Port 80"
     from_port   = 80
@@ -54,3 +54,19 @@ resource "aws_security_group" "vpc-web" {
   }
 }
 
+# Create Security Group - Redis
+resource "aws_security_group" "vpc-redis" {
+  name	      = "vpc-redis"
+  description = "Semiramis VPC Redis"
+  ingress {
+    description = "Allow Port 6379"
+    from_port   = 6379
+    to_port     = 6379
+    protocol    = "tcp"
+    cidr_blocks = ["185.92.122.211/32"]
+   }
+
+   tags = {
+     Name = "vpc-redis"
+   }
+}
